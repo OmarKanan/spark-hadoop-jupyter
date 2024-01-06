@@ -11,7 +11,6 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
-      - 4040:4040
     working_dir: /app
 
   spark-worker-1:
@@ -47,11 +46,13 @@ services:
     ports:
       - 50075:50075
 
-  jupyter:
-    container_name: jupyter
+  python:
+    container_name: python
     build: 
-      dockerfile: jupyter.dockerfile
-    ports:
-      - 8889:8889
+      dockerfile: python.dockerfile
+    working_dir: /home/vscode/app
     volumes:
-      - ./notebooks:/notebooks
+      - ./app:/home/vscode/app
+    ports:
+      - 8888:8888
+      - 4040:4040
